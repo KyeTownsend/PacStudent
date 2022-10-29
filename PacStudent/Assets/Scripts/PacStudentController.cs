@@ -19,6 +19,9 @@ public class PacStudentController : MonoBehaviour
 
     private Animator anim;
 
+    public AudioSource AudioSource;
+    public AudioClip movingSFX;
+
     void Start() {
 
       PacVectorUp = new Vector3(0.0f, 2.0f, 0.0f);
@@ -91,22 +94,37 @@ public class PacStudentController : MonoBehaviour
 
             if(currentInput == 1 && isMoving) {
                 anim.Play("Up", 0, 0.0f);
+            } else {
+                AudioSource.Stop();
             }
+
             if(currentInput == 2 && isMoving) {
                 anim.Play("Left", 0, 0.0f);
+            } else {
+                AudioSource.Stop();
             }
+
             if(currentInput == 3 && isMoving) {
                 anim.Play("Down", 0, 0.0f);
+            } else {
+                AudioSource.Stop();
             }
+
             if(currentInput == 4 && isMoving) {
                 anim.Play("Right", 0, 0.0f);
+            } else {
+                AudioSource.Stop();
             }
+            
 
             if(!Physics2D.OverlapCircle(targetPos, 0.1f, walls)){
                 while (elapsedTime < timeToMove) {
                     transform.position = Vector3.Lerp(origPos, targetPos, (elapsedTime / timeToMove));
                     elapsedTime += Time.deltaTime;
                     yield return null;
+                    if (!AudioSource.isPlaying) {
+                        AudioSource.Play();
+                  }
                 }
             }
         isMoving = false;
