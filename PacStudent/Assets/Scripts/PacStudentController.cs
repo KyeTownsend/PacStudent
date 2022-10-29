@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PacStudentController : MonoBehaviour
 {
+
     private bool isMoving;
     int currentInput = 0;
     int lastInput = 0;
@@ -128,6 +129,7 @@ public class PacStudentController : MonoBehaviour
 
 
             if(!Physics2D.OverlapCircle(targetPos, 0.1f, walls)){
+                walk.Play();
                 while (elapsedTime < timeToMove) {
                     transform.position = Vector3.Lerp(origPos, targetPos, (elapsedTime / timeToMove));
                     elapsedTime += Time.deltaTime;
@@ -135,7 +137,6 @@ public class PacStudentController : MonoBehaviour
                     if (!AudioSource.isPlaying) {
                         AudioSource.Play();
                   }
-                    walk.Play();
                 }
             }
         isMoving = false;
