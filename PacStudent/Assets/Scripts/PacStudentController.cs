@@ -22,6 +22,8 @@ public class PacStudentController : MonoBehaviour
     public AudioSource AudioSource;
     public AudioClip movingSFX;
 
+    public ParticleSystem walk;
+
     void Start() {
 
       PacVectorUp = new Vector3(0.0f, 2.0f, 0.0f);
@@ -83,6 +85,10 @@ public class PacStudentController : MonoBehaviour
         }
     }
 
+    void Walk() {
+        walk.Play();
+    }
+
     private IEnumerator MovePlayer(Vector3 Direction) {
 
             isMoving = true;
@@ -96,26 +102,30 @@ public class PacStudentController : MonoBehaviour
                 anim.Play("Up", 0, 0.0f);
             } else {
                 AudioSource.Stop();
+                walk.Stop();
             }
 
             if(currentInput == 2 && isMoving) {
                 anim.Play("Left", 0, 0.0f);
             } else {
                 AudioSource.Stop();
+                walk.Stop();
             }
 
             if(currentInput == 3 && isMoving) {
                 anim.Play("Down", 0, 0.0f);
             } else {
                 AudioSource.Stop();
+                walk.Stop();
             }
 
             if(currentInput == 4 && isMoving) {
                 anim.Play("Right", 0, 0.0f);
             } else {
                 AudioSource.Stop();
+                walk.Stop();
             }
-            
+
 
             if(!Physics2D.OverlapCircle(targetPos, 0.1f, walls)){
                 while (elapsedTime < timeToMove) {
@@ -125,6 +135,7 @@ public class PacStudentController : MonoBehaviour
                     if (!AudioSource.isPlaying) {
                         AudioSource.Play();
                   }
+                    walk.Play();
                 }
             }
         isMoving = false;
