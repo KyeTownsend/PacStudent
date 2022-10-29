@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class CherryController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public GameObject cherry;
+
+    void Update() {
+
+        int randomHeight = Random.Range(1, 30) * 2;
+        Vector3 randomSpawn = new Vector3(transform.position.x, transform.position.y + randomHeight , transform.position.z);
+        Instantiate(cherry, randomSpawn, Quaternion.identity);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
