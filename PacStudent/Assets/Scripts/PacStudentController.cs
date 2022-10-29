@@ -14,6 +14,7 @@ public class PacStudentController : MonoBehaviour
     Vector3 PacVectorLeft;
     Vector3 PacVectorRight;
 
+    public LayerMask walls;
 
     void Start() {
 
@@ -55,22 +56,22 @@ public class PacStudentController : MonoBehaviour
 
     private IEnumerator MovePlayer(Vector3 Direction) {
 
-        isMoving = true;
+            isMoving = true;
 
-        float elapsedTime = 0;
+            float elapsedTime = 0;
 
-        origPos = transform.position;
-        targetPos = origPos + Direction;
+            origPos = transform.position;
+            targetPos = origPos + Direction;
 
-        while (elapsedTime < timeToMove) {
+            if(!Physics2D.OverlapCircle(targetPos, 0.2f, walls)){
+                while (elapsedTime < timeToMove) {
+                    transform.position = Vector3.Lerp(origPos, targetPos, (elapsedTime / timeToMove));
+                    elapsedTime += Time.deltaTime;
+                    yield return null;
+                }
+            }
 
-            transform.position = Vector3.Lerp(origPos, targetPos, (elapsedTime / timeToMove));
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.position = targetPos;
-
+        yield return null;
         isMoving = false;
 
     }
