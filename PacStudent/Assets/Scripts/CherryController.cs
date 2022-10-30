@@ -25,4 +25,17 @@ public class CherryController : MonoBehaviour
           elapsedTime += Time.deltaTime;
     }
 
+    protected virtual void Eat() {
+        FindObjectOfType<GameManager>().CherryEaten(this);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Pacman")) {
+            Debug.Log("cherry eaten");
+            Eat();
+        } else {
+            Debug.Log("cherry collided but not with pacman");
+        }
+    }
+
 }

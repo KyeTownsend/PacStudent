@@ -142,4 +142,30 @@ public class PacStudentController : MonoBehaviour
         isMoving = false;
         yield return null;
     }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("collision detected");
+        if (other.gameObject.layer == LayerMask.NameToLayer("LeftTeleporter")) {
+            Debug.Log("left teleporter activated");
+            teleport(0);
+        } else if (other.gameObject.layer == LayerMask.NameToLayer("RightTeleporter")) {
+            Debug.Log("right teleporter activated");
+            teleport(1);
+        }
+    }
+
+    public void teleport(int dir) {
+            Debug.Log("tp function actiavted");
+            if (dir == 0) {
+            transform.position = new Vector3(21, -9, 0);
+            origPos = transform.position;
+            targetPos = transform.position + PacVectorLeft;
+            } else {
+            transform.position = new Vector3(-33, -9, 0);
+            origPos = transform.position;
+            targetPos = transform.position + PacVectorRight;
+            }
+            Debug.Log("Left Teleporter Activated");
+    }
+
 }

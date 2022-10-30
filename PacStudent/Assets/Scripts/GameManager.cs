@@ -15,17 +15,21 @@ public class GameManager : MonoBehaviour
     }
 
     private void SetScore(int score) {
+        this.score = score;
         Text scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
         scoreText.text = ("Score: " + this.score.ToString());
-        this.score = score;
     }
 
     public void PelletEaten(Pellet pellet) {
         pellet.gameObject.SetActive(false);
         SetScore(this.score + 10);
-        Debug.Log("parsed");
+        Debug.Log("parsed pellet eaten");
     }
 
-
+    public void CherryEaten(CherryController cherry) {
+        cherry.gameObject.SetActive(false);
+        SetScore(this.score + 100);
+        Debug.Log("parsed cherry eaten");
+    }
 
 }

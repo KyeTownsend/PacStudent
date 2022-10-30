@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Music
   - Score
+  - LeftTeleporter
+  - RightTeleporter
   layers:
   - Default
   - TransparentFX
@@ -20,8 +22,8 @@ TagManager:
   - Node
   - Teleporters
   - Cherry
-  - 
-  - 
+  - LeftTeleporter
+  - RightTeleporter
   - 
   - 
   - 
