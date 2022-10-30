@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Pellet : MonoBehaviour
 {
-
     protected virtual void Eat() {
         FindObjectOfType<GameManager>().PelletEaten(this);
     }
@@ -13,5 +12,4 @@ public class Pellet : MonoBehaviour
         Debug.Log("eaten");
         Eat();
     }
-
 }

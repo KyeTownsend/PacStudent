@@ -22,6 +22,8 @@ public class PacStudentController : MonoBehaviour
 
     public AudioSource AudioSource;
     public AudioClip movingSFX;
+    public AudioSource pelletSource;
+    public AudioClip pelletSFX;
 
     public ParticleSystem walk;
 
@@ -152,8 +154,12 @@ public class PacStudentController : MonoBehaviour
             Debug.Log("right teleporter activated");
             teleport(1);
         }
-    }
 
+        if (other.gameObject.layer == LayerMask.NameToLayer("Pellet")) {
+            pelletSource.PlayOneShot(pelletSFX, 0.05f);
+        }
+
+    }
     public void teleport(int dir) {
             Debug.Log("tp function actiavted");
             if (dir == 0) {
